@@ -1,0 +1,23 @@
+# Python và notebook
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# Thông tin đăng nhập
+.env
+.env.*
+!.env.example
+kaggle.json
+
+# Dữ liệu và kết quả lớn
+data/raw/
+data/processed/
+runs/
+weights/
+*.pt
+*.onnx
+*.zip
+*.mp4
+*.avi
