@@ -18,7 +18,14 @@ python scripts/evaluate_helmet.py --data-root /path/to/helmet_yolo --manifests m
 
 Thư mục đầu ra cần là một đường dẫn mới. Script tạo kết quả theo tập, thông tin phép đo, CSV tốc độ và biểu đồ. [Kết quả kiểm thử cuối](results/helmet_test_summary.csv) · [Tốc độ trên ảnh](results/helmet_speed_summary.csv) · [Đầu ra Kaggle](https://www.kaggle.com/code/maika123/notebookc7801aaccc/output?scriptVersionId=366157817)
 
-`results/summary_smoke_probe.csv` và `results/speed_probe.csv` ghi các lượt chạy thử. Cấu hình lần huấn luyện chính 30 epoch được ghi tại [experiment_config.json](configs/experiment_config.json).
+| Mô hình | mAP@0.5:0.95 trên `test_clean` | FPS trên ảnh |
+| --- | ---: | ---: |
+| YOLOv8n | 63,14% | 107,24 |
+| YOLOv8s | 65,11% | 54,95 |
+| YOLOv8m | 65,48% | 22,24 |
+| YOLOv5su | 64,78% | 62,44 |
+
+FPS trên ảnh được đo trên Tesla T4 với batch 1, từ ảnh đã giải mã. `results/summary_smoke_probe.csv` và `results/speed_probe.csv` ghi các lượt chạy thử. Cả bốn mô hình hoàn thành 30 epoch. [Cấu hình huấn luyện](configs/experiment_config.json)
 
 ## Tái tạo video demo
 

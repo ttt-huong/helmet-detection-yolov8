@@ -10,12 +10,15 @@
   "epochs": 30,
   "device": 0,
   "save_period": 5,
-  "optimizer": "auto; ghi giá trị thực từ args.yaml sau mỗi run (lần thử: AdamW, lr0 0.001667)",
+  "optimizer": "auto",
+  "optimizer_observed": "AdamW",
+  "initial_lr_observed": 0.001667,
+  "momentum_observed": 0.9,
   "order": [
     "v8m_main",
     "v8s_main",
     "v8n_main",
-    "v5su_main (nếu chạy baseline)"
+    "v5su_main"
   ],
   "selection": "best.pt do thư viện chọn trên val_clean; không dùng test để chọn",
   "eval_sets": [
@@ -23,5 +26,5 @@
     "test_clean",
     "test_clean_site"
   ],
-  "speed_protocol": "mọi mô hình cùng thiết bị và phiên, batch 1, warm-up, đo lặp, lưu thống kê"
+  "speed_protocol": "Tesla T4, batch 1, làm nóng 20 lượt, 100 ảnh test_clean đo 3 lần cho mỗi mô hình"
 }

@@ -9,5 +9,5 @@
 - 610box difficult được tính như nhãn thường; cần ghi rõ khác biệt nếu so với bài dùng VOC ignore-difficult.
 - Ultralytics đã cảnh báo tự sửa khoảng53JPEG; chưa lưu danh sách và hash trước/sau đầy đủ trong hồ sơ này.
 - Các run hiện dùng một seed42,30epochs. Không suy ra khác biệt có ý nghĩa thống kê hay tối ưu tuyệt đối.
-- Các số hiện có là validation; chưa có test cuối hoặc benchmark tốc độ chính thức.
+- Kết quả kiểm thử cuối trên ba tập và benchmark ảnh đã được lưu trong thư mục `results/`. Benchmark ảnh gồm tiền xử lý, suy luận và NMS. Phép đo tốc độ video trong báo cáo có thêm đọc và ghi video, vẽ khung và lưu ảnh mẫu. [Kết quả kiểm thử](../results/helmet_test_summary.csv) · [Benchmark ảnh](../results/helmet_speed_summary.csv)
 - license_checked=True chỉ ghi nhận đã đọc nguồn. Repo SHWD có MIT, SCUT-HEAD ghi phạm vi nghiên cứu học thuật; quyền ảnh bên thứ ba và quyền phát hành lại toàn bộ dataset chưa được xác minh.
