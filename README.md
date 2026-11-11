@@ -8,6 +8,12 @@ Mở [notebook chuẩn bị dữ liệu](notebooks/01_Chuan_bi_va_khao_sat_du_li
 
 Tập chính là `test_clean` (1.087 ảnh). Tập `test` gốc (1.517 ảnh) dùng để tham chiếu. `test_clean_site` (628 ảnh) là tập con lọc theo nguồn `numeric` và `part2`. Bối cảnh công trường của từng ảnh trong tập con chưa được xác minh.
 
+## Huấn luyện trên Colab
+
+Notebook gồm 25 ô. 17 ô đầu chuẩn bị dữ liệu và chạy thử. Tám ô cuối ghi lại phần khôi phục dữ liệu, thiết lập thí nghiệm, huấn luyện chính và kiểm tra checkpoint. Chỉ chạy các ô huấn luyện khi cần tạo lại trọng số. Kiểm tra thư mục từng run trên Drive trước khi chạy, vì các ô sử dụng tên run và checkpoint đã định sẵn.
+
+Ô cuối khởi chạy YOLOv5su trên Colab. Run đối chứng bị gián đoạn ở epoch 2 và được tiếp tục đến epoch 30 trên Kaggle. [Đầu ra YOLOv5su trên Kaggle](https://www.kaggle.com/code/maika123/notebook7514cf8358/output?scriptVersionId=366138307)
+
 ## Đánh giá
 
 Dùng Python 3.12 trở lên, PyTorch có CUDA và `pip install -r requirements.txt`. Lấy bốn checkpoint của nhóm từ Drive và đặt mỗi tệp tên `best.pt` trong thư mục tương ứng. [Thư mục các lần huấn luyện](https://drive.google.com/drive/folders/16BKDss7JgPP565ayg1fow6ZEUUdVbbzh)
