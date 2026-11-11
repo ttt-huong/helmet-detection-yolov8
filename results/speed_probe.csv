@@ -1,0 +1,4 @@
+model,batch_size,peak_vram_gb,epoch2_s,est_full_epoch_s,est_50ep_h,inference_latency_ms
+yolov8n.pt,16,3.0,26,104,1.4,9.0
+yolov8s.pt,16,5.7,30,118,1.6,12.5
+yolov8m.pt,16,9.0,53,212,2.9,19.8

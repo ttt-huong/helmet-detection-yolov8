@@ -1,0 +1,27 @@
+{
+  "saved_at_utc": "2026-11-05T03:52:31.876408+00:00",
+  "ultralytics": "8.4.202",
+  "torch": "2.11.0+cu130",
+  "gpu": "Tesla T4",
+  "data_yaml": "/content/helmet_yolo/data.yaml",
+  "imgsz": 640,
+  "batch": 16,
+  "seed": 42,
+  "epochs": 30,
+  "device": 0,
+  "save_period": 5,
+  "optimizer": "auto; ghi giá trị thực từ args.yaml sau mỗi run (lần thử: AdamW, lr0 0.001667)",
+  "order": [
+    "v8m_main",
+    "v8s_main",
+    "v8n_main",
+    "v5su_main (nếu chạy baseline)"
+  ],
+  "selection": "best.pt do thư viện chọn trên val_clean; không dùng test để chọn",
+  "eval_sets": [
+    "test gốc (ghi rõ rò rỉ)",
+    "test_clean",
+    "test_clean_site"
+  ],
+  "speed_protocol": "mọi mô hình cùng thiết bị và phiên, batch 1, warm-up, đo lặp, lưu thống kê"
+}
