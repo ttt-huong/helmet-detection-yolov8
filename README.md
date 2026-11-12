@@ -4,7 +4,13 @@ Dự án Nhóm 17 dùng dữ liệu SHWD với hai lớp `helmet` và `bare_head
 
 ## Chuẩn bị dữ liệu
 
-Mở [notebook chuẩn bị dữ liệu](notebooks/01_Chuan_bi_va_khao_sat_du_lieu.ipynb) trên Colab. Các tệp trong `manifests/` chứa ID ảnh dùng trong thực nghiệm. Thư mục YOLO đã chuẩn bị cần có `images/`, `labels/` và các tệp `train.txt`, `val_clean.txt`, `test.txt`, `test_clean.txt`, `test_clean_site.txt` ghi đường dẫn tuyệt đối tới ảnh theo đúng thứ tự ID tương ứng. [Quy tắc nhãn](configs/label_rules.md) · [Giới hạn dữ liệu](configs/dataset_limitations.md)
+Tải [VOC2028.zip gốc](https://drive.google.com/file/d/1qWm7rrwvjAWs1slymbrLaCf7Q-wnGLEX/view) từ nguồn của bộ dữ liệu SHWD. Dùng Python 3.12 trở lên và chạy từ thư mục repo:
+
+```shell
+python scripts/prepare_shwd.py --archive /path/to/VOC2028.zip --manifests manifests --output data/processed/helmet_yolo
+```
+
+Script kiểm tra SHA-256 của tệp ZIP và các danh sách chia tập, rồi tạo 7.581 ảnh, 120.561 nhãn và bảy danh sách chia tập. Dùng thư mục đầu ra mới. [Notebook chuẩn bị dữ liệu](notebooks/01_Chuan_bi_va_khao_sat_du_lieu.ipynb) · [Quy tắc nhãn](configs/label_rules.md) · [Giới hạn dữ liệu](configs/dataset_limitations.md)
 
 Tập chính là `test_clean` (1.087 ảnh). Tập `test` gốc (1.517 ảnh) dùng để tham chiếu. `test_clean_site` (628 ảnh) là tập con lọc theo nguồn `numeric` và `part2`. Bối cảnh công trường của từng ảnh trong tập con chưa được xác minh.
 
@@ -32,6 +38,18 @@ Thư mục đầu ra cần là một đường dẫn mới. Script tạo kết q
 | YOLOv5su | 64,78% | 62,44 |
 
 FPS trên ảnh được đo trên Tesla T4 với batch 1, từ ảnh đã giải mã. `results/summary_smoke_probe.csv` và `results/speed_probe.csv` ghi các lượt chạy thử. Cả bốn mô hình hoàn thành 30 epoch. [Cấu hình huấn luyện](configs/experiment_config.json)
+
+### Kiểm tra nhanh bằng CPU
+
+Cài bản PyTorch phù hợp với máy và chạy `pip install -r requirements.txt`. Đặt bốn checkpoint tin cậy tại `weights/v8n/best.pt`, `weights/v8s/best.pt`, `weights/v8m/best.pt` và `weights/v5su/best.pt`. Script đối chiếu mã SHA-256 với kết quả đã lưu trước khi nạp trọng số.
+
+```shell
+python scripts/smoke_repro.py --data-root data/processed/helmet_yolo --manifests manifests --weights weights --output runs/smoke
+```
+
+Lệnh kiểm tra suy luận và đánh giá trên 24 ảnh cố định của `test_clean`. Kết quả trong `smoke_summary.json` dùng để kiểm tra quy trình. Để tái tạo bảng thực nghiệm và FPS, dùng lệnh đánh giá đầy đủ với CUDA ở trên.
+
+[Checklist 13 nhóm kiểm thử](docs/checklist_kiem_thu.md) · [Số liệu phân tích lỗi](results/strata_v8m_test_clean.csv) · [Danh mục 10 ca lỗi](results/error_case_index.csv)
 
 ## Tái tạo video demo
 

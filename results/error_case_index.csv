@@ -1,0 +1,11 @@
+image_id,status,index,class_name,mean_image_y,observation,interpretation_limit
+000019,FN,4,helmet,149.2,Hộp cạnh dài 15.1 px ở thang 640; dự đoán cùng lớp IoU 0.712 và confidence 0.0011,Nhóm hộp nhỏ; chưa xác định tác động riêng của mật độ
+000194,FN,21,helmet,88.9,Đối tượng có nhãn helmet nằm trong đám đông; hộp 15.0 px,Vùng đỏ mờ khiến việc kiểm tra loại mũ bằng mắt hạn chế
+000321,FN,10,helmet,142.9,Vùng đầu xa bị che một phần; dự đoán cùng lớp IoU 0.908 và confidence 0.312,Vật nhỏ và che khuất cùng xuất hiện
+001044,FN,31,helmet,145.9,Vùng đầu có mũ sáng màu trong nhóm người; hộp 14.9 px,Chi tiết thấp trong ảnh phóng to
+000577,FN,9,bare_head,56.4,Dự đoán sai lớp helmet confidence 0.642 chồng lên nhãn với IoU 0.803,Nhầm lớp xảy ra trong ảnh tối
+PartB_00076,FN,11,bare_head,54.3,Đầu ở mép vùng cắt giữa nhóm người; nhãn không ghép ở ngưỡng đã chọn,Trang phục và nền tối cùng xuất hiện
+PartB_01294,FN,72,bare_head,35.2,Vùng đầu trong ảnh đám đông tối và nhòe; hộp 23.0 px,Không tách riêng ảnh hưởng của độ sáng và độ mờ
+PartB_02203,FN,1,bare_head,57.6,Vùng đầu phía trái có ít chi tiết nhìn thấy; hộp 33.3 px,Cần xem ảnh gốc trước khi diễn giải tình trạng đội mũ
+000441,FP,3,helmet,81.0,Mũ kê-pi bị báo helmet confidence 0.896; IoU 0.950 với nhãn bare_head,Ca nhầm mũ thường trong tập này
+001335,FP,0,helmet,169.4,Khung helmet confidence 0.914 phủ mũ xanh che quanh mặt,Nhãn và phạm vi lớp cần được đối chiếu khi diễn giải ca này
