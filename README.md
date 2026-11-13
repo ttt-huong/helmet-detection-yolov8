@@ -1,8 +1,6 @@
-<h1 align="center">Phát hiện mũ bảo hộ bằng YOLOv8</h1>
-
-<p align="center">
-  <img src="docs/assets/readme-banner.svg" alt="Minh họa mũ bảo hộ trong khung phát hiện" width="100%">
-</p>
+<h1 align="center">
+  <img src="docs/assets/readme-banner.webp" alt="Phát hiện mũ bảo hộ bằng YOLOv8" width="100%">
+</h1>
 
 <p align="center">
   <a href="https://drive.google.com/drive/folders/1d4UUCgZ9figKF6BIRLrJe0rGwLsUl7oo"><img alt="Xem video demo" src="https://img.shields.io/badge/VIDEO-DEMO-087F82?style=flat-square"></a>
