@@ -1,10 +1,10 @@
 # Phát hiện mũ bảo hộ bằng YOLOv8
 
-**Dự án của [ttt-huong](https://github.com/ttt-huong) · Nơ-ron và Học sâu · Đại học Phenikaa**
+**Nơ-ron và Học sâu · Đại học Phenikaa**
 
-Tôi thực hiện dự án này để phát hiện người có đội mũ bảo hộ trong ảnh và video công trường. Mô hình định vị vùng đầu và gán một trong hai nhãn: `helmet` (đội mũ bảo hộ) hoặc `bare_head` (đầu không đội mũ bảo hộ).
+Dự án phát hiện tình trạng đội mũ bảo hộ trong ảnh và video công trường. Mô hình định vị vùng đầu và gán nhãn `helmet` (đội mũ bảo hộ) hoặc `bare_head` (đầu không đội mũ bảo hộ).
 
-Tôi chuẩn bị dữ liệu SHWD, huấn luyện và so sánh YOLOv8n, YOLOv8s, YOLOv8m với mô hình đối chứng YOLOv5su. Repo lưu quy trình đánh giá, phân tích các ca bỏ sót và chạy demo trên video hoặc webcam.
+Thí nghiệm so sánh YOLOv8n, YOLOv8s, YOLOv8m và mô hình đối chứng YOLOv5su trên bộ dữ liệu SHWD. Kho mã gồm quy trình chuẩn bị dữ liệu, huấn luyện, đánh giá, phân tích lỗi và chạy demo trên video hoặc webcam.
 
 [Xem video demo](https://drive.google.com/drive/folders/1d4UUCgZ9figKF6BIRLrJe0rGwLsUl7oo) · [Xem báo cáo](https://docs.google.com/document/d/10zXsgy_0juhgdIpex2dbZ8Y8d3KVphTD/edit) · [Xem kết quả Kaggle](https://www.kaggle.com/code/maika123/notebookc7801aaccc/output?scriptVersionId=366157817)
 
@@ -145,5 +145,5 @@ Phân tích che khuất mô tả mẫu 48 hộp, trong đó 15 hộp chưa đủ
 ## Nguồn
 
 - Bộ dữ liệu và tài liệu mô hình. [SHWD](https://github.com/njvisionpower/Safety-Helmet-Wearing-Dataset) · [Ultralytics YOLOv8](https://docs.ultralytics.com/models/yolov8/) · [Ultralytics YOLOv5u](https://docs.ultralytics.com/models/yolov5/)
-- Tôi tham khảo script của Tuấn khi triển khai phép ghép hộp trong `analyze_saved_v8m.py`. [Mã phân tích gốc](https://github.com/mahTuqn/Noron/blob/main/scripts/analyze_errors.py)
+- Phép ghép hộp trong `analyze_saved_v8m.py` dựa trên mã phân tích của Tuấn. [Mã phân tích gốc](https://github.com/mahTuqn/Noron/blob/main/scripts/analyze_errors.py)
 - Tham khảo bố cục README. [Ultralytics YOLOv5](https://github.com/ultralytics/yolov5) · [Detectron2](https://github.com/facebookresearch/detectron2) · [MMDetection](https://github.com/open-mmlab/mmdetection)
