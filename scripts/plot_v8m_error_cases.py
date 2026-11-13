@@ -6,14 +6,6 @@ import math
 from pathlib import Path, PurePosixPath
 import zipfile
 
-import cv2
-import matplotlib
-matplotlib.use("Agg")
-import matplotlib.pyplot as plt
-from matplotlib.patches import Rectangle
-import numpy as np
-
-
 def read_rows(folder, name):
     with (folder / name).open(encoding="utf-8-sig", newline="") as stream:
         return list(csv.DictReader(stream))
@@ -63,6 +55,15 @@ def main():
     parser.add_argument("--out", type=Path, required=True)
     parser.add_argument("--cases", nargs="+", help="Case keys in form image_id:FN-or-FP:index")
     args = parser.parse_args()
+
+    import cv2
+    import matplotlib
+    import numpy as np
+
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    from matplotlib.patches import Rectangle
+
     gt = read_rows(args.analysis, "ground_truth_matches.csv")
     pred = read_rows(args.analysis, "prediction_matches.csv")
     imgs = {r["image_id"]: r for r in read_rows(args.analysis, "image_review.csv")}

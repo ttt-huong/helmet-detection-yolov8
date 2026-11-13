@@ -5,12 +5,6 @@ import os
 from pathlib import Path
 import sys
 
-import cv2
-import mediapipe as mp
-import torch
-from ultralytics import YOLO
-
-
 WINDOW_NAME = "YOLOv8m - Webcam | Q / Esc: thoat"
 
 
@@ -27,6 +21,9 @@ def forehead_covered(hands, face, width, height):
 
 def detect_status(model, face_detector, hand_detector, frame):
     """Return one face-aligned prediction, or a reason to abstain."""
+    import cv2
+    import mediapipe as mp
+
     image = mp.Image(image_format=mp.ImageFormat.SRGB, data=cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
     faces = face_detector.detect(image).detections
     if not faces:
@@ -70,6 +67,21 @@ def main():
         if not path.is_file():
             parser.error(f"Không tìm thấy mô hình hỗ trợ {path}")
 
+    import cv2
+
+    try:
+        run_demo(args, parser, face_path, hand_path)
+    except (RuntimeError, cv2.error) as error:
+        print(error, file=sys.stderr)
+        sys.exit(1)
+
+
+def run_demo(args, parser, face_path, hand_path):
+    import cv2
+    import mediapipe as mp
+    import torch
+    from ultralytics import YOLO
+
     torch.set_num_threads(min(6, os.cpu_count() or 1))
     cv2.setNumThreads(2)
     model = YOLO(str(args.weights))
@@ -94,6 +106,8 @@ def main():
 
 
 def show_camera(index, model, face_detector, hand_detector):
+    import cv2
+
     camera = cv2.VideoCapture(index)
     window_open = False
     previous_label, consecutive = None, 0
@@ -136,8 +150,4 @@ def show_camera(index, model, face_detector, hand_detector):
 
 
 if __name__ == "__main__":
-    try:
-        main()
-    except (RuntimeError, cv2.error) as error:
-        print(error, file=sys.stderr)
-        sys.exit(1)
+    main()

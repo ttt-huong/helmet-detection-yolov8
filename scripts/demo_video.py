@@ -8,11 +8,6 @@ import subprocess
 from tempfile import TemporaryDirectory
 from time import perf_counter
 
-import cv2
-import torch
-from ultralytics import YOLO, __version__
-
-
 CONFIDENCE = 0.25
 EXPECTED_FRAMES = 874
 
@@ -27,6 +22,11 @@ def main():
     for path in (source, weights):
         if not path.is_file():
             parser.error(f"File not found: {path}")
+
+    import cv2
+    import torch
+    from ultralytics import YOLO, __version__
+
     torch.set_num_threads(min(6, os.cpu_count() or 1))
     cv2.setNumThreads(2)
     model = YOLO(str(weights))

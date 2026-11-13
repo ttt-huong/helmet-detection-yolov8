@@ -7,9 +7,6 @@ import json
 from pathlib import Path
 import random
 
-import cv2
-import numpy as np
-
 from evaluate_helmet import check_manifests, write_json
 from prepare_shwd import load_manifests
 
@@ -32,6 +29,9 @@ def write_csv(path, rows):
 
 
 def image_scores(path):
+    import cv2
+    import numpy as np
+
     image = cv2.imdecode(np.fromfile(path, dtype=np.uint8), cv2.IMREAD_COLOR)
     if image is None:
         raise ValueError(f"Unreadable image: {path}")
@@ -92,6 +92,9 @@ def occlusion_sample(matches):
 
 
 def prepare(args):
+    import cv2
+    import numpy as np
+
     root = args.data_root.resolve()
     val, test, matches = frozen_inputs(root, args.manifests, args.matches)
     cv2.setNumThreads(2)

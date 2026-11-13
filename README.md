@@ -3,6 +3,7 @@
 </h1>
 
 <p align="center">
+  <a href="https://github.com/ttt-huong/helmet-detection-yolov8/actions/workflows/ci.yml"><img alt="Trạng thái build trên GitHub Actions" src="https://github.com/ttt-huong/helmet-detection-yolov8/actions/workflows/ci.yml/badge.svg"></a>
   <a href="https://drive.google.com/file/d/1Om8I1JsG1h8oeqn_iCFl5QcGQYJWE1D8/view"><img alt="Xem video demo" src="https://img.shields.io/badge/VIDEO-DEMO-087F82?style=flat-square"></a>
   <a href="https://www.kaggle.com/code/maika123/notebookc7801aaccc/output?scriptVersionId=366157817"><img alt="Kết quả đánh giá trên Kaggle" src="https://img.shields.io/badge/KAGGLE-K%E1%BA%BET%20QU%E1%BA%A2-175B91?style=flat-square"></a>
   <a href="https://docs.google.com/document/d/10zXsgy_0juhgdIpex2dbZ8Y8d3KVphTD/edit"><img alt="Đọc báo cáo" src="https://img.shields.io/badge/DRIVE-B%C3%81O%20C%C3%81O-344968?style=flat-square"></a>

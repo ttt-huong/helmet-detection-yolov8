@@ -4,11 +4,6 @@ import argparse
 import csv
 from pathlib import Path
 
-from matplotlib import pyplot as plt
-from matplotlib.patches import Rectangle
-from PIL import Image
-
-
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--sample", type=Path, required=True)
@@ -16,6 +11,11 @@ def main():
     p.add_argument("--output", type=Path, required=True)
     p.add_argument("--limit", type=int)
     args = p.parse_args()
+
+    from matplotlib import pyplot as plt
+    from matplotlib.patches import Rectangle
+    from PIL import Image
+
     with args.sample.open(encoding="utf-8-sig", newline="") as stream:
         rows = list(csv.DictReader(stream))[:args.limit]
     images = {f.stem: f for f in args.images.iterdir() if f.is_file()}
