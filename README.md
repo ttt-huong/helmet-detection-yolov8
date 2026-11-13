@@ -1,14 +1,32 @@
-# Phát hiện mũ bảo hộ bằng YOLOv8
+<h1 align="center">Phát hiện mũ bảo hộ bằng YOLOv8</h1>
 
-**Nơ-ron và Học sâu · Đại học Phenikaa**
+<p align="center">
+  <img src="docs/assets/readme-banner.svg" alt="Minh họa mũ bảo hộ trong khung phát hiện" width="100%">
+</p>
 
-Dự án phát hiện tình trạng đội mũ bảo hộ trong ảnh và video công trường. Mô hình định vị vùng đầu và gán nhãn `helmet` (đội mũ bảo hộ) hoặc `bare_head` (đầu không đội mũ bảo hộ).
+<p align="center">
+  <a href="https://drive.google.com/drive/folders/1d4UUCgZ9figKF6BIRLrJe0rGwLsUl7oo"><img alt="Xem video demo" src="https://img.shields.io/badge/VIDEO-DEMO-087F82?style=flat-square"></a>
+  <a href="https://www.kaggle.com/code/maika123/notebookc7801aaccc/output?scriptVersionId=366157817"><img alt="Kết quả đánh giá trên Kaggle" src="https://img.shields.io/badge/KAGGLE-K%E1%BA%BET%20QU%E1%BA%A2-175B91?style=flat-square"></a>
+  <a href="https://docs.google.com/document/d/10zXsgy_0juhgdIpex2dbZ8Y8d3KVphTD/edit"><img alt="Đọc báo cáo" src="https://img.shields.io/badge/DRIVE-B%C3%81O%20C%C3%81O-344968?style=flat-square"></a>
+</p>
 
-Thí nghiệm so sánh YOLOv8n, YOLOv8s, YOLOv8m và mô hình đối chứng YOLOv5su trên bộ dữ liệu SHWD. Kho mã gồm quy trình chuẩn bị dữ liệu, huấn luyện, đánh giá, phân tích lỗi và chạy demo trên video hoặc webcam.
+<p align="center">
+  Định vị vùng đầu trong ảnh và video công trường với hai nhãn <code>helmet</code> và <code>bare_head</code>.<br>
+  So sánh YOLOv8n, YOLOv8s, YOLOv8m và YOLOv5su trên bộ dữ liệu SHWD.
+</p>
 
-[Xem video demo](https://drive.google.com/drive/folders/1d4UUCgZ9figKF6BIRLrJe0rGwLsUl7oo) · [Xem báo cáo](https://docs.google.com/document/d/10zXsgy_0juhgdIpex2dbZ8Y8d3KVphTD/edit) · [Xem kết quả Kaggle](https://www.kaggle.com/code/maika123/notebookc7801aaccc/output?scriptVersionId=366157817)
+<p align="center">
+  <a href="#kết-quả">Kết quả</a> · <a href="#chạy-nhanh">Chạy nhanh</a> · <a href="#dữ-liệu-và-huấn-luyện">Dữ liệu</a> · <a href="#tái-lập-đánh-giá">Tái lập</a> · <a href="#phân-tích-lỗi">Phân tích lỗi</a>
+</p>
 
-[Kết quả](#kết-quả) · [Chạy nhanh](#chạy-nhanh) · [Dữ liệu và huấn luyện](#dữ-liệu-và-huấn-luyện) · [Tái lập đánh giá](#tái-lập-đánh-giá) · [Phân tích lỗi](#phân-tích-lỗi)
+<details>
+<summary>Xem khung hình dự đoán từ video công trường</summary>
+
+![Khung hình công trường với các hộp dự đoán helmet của YOLOv8m](docs/assets/demo-frame.jpg)
+
+Khung hình tại 18,67 giây từ demo YOLOv8m. Nguồn video: [aksinfo7 universe trên Pexels](https://www.pexels.com/video/construction-workers-building-urban-skyscraper-29888510/).
+
+</details>
 
 ## Kết quả
 
@@ -146,4 +164,4 @@ Phân tích che khuất mô tả mẫu 48 hộp, trong đó 15 hộp chưa đủ
 
 - Bộ dữ liệu và tài liệu mô hình. [SHWD](https://github.com/njvisionpower/Safety-Helmet-Wearing-Dataset) · [Ultralytics YOLOv8](https://docs.ultralytics.com/models/yolov8/) · [Ultralytics YOLOv5u](https://docs.ultralytics.com/models/yolov5/)
 - Phép ghép hộp trong `analyze_saved_v8m.py` dựa trên mã phân tích của Tuấn. [Mã phân tích gốc](https://github.com/mahTuqn/Noron/blob/main/scripts/analyze_errors.py)
-- Tham khảo bố cục README. [Ultralytics YOLOv5](https://github.com/ultralytics/yolov5) · [Detectron2](https://github.com/facebookresearch/detectron2) · [MMDetection](https://github.com/open-mmlab/mmdetection)
+- Tham khảo bố cục README. [Ultralytics YOLOv5](https://github.com/ultralytics/yolov5) · [Roboflow Supervision](https://github.com/roboflow/supervision) · [Detectron2](https://github.com/facebookresearch/detectron2) · [MMDetection](https://github.com/open-mmlab/mmdetection)

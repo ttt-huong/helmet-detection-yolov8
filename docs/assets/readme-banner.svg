@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="340" viewBox="0 0 1200 340" role="img" aria-labelledby="title desc">
+  <title id="title">Phát hiện mũ bảo hộ bằng YOLOv8</title>
+  <desc id="desc">Banner nền xanh đậm, chữ trắng và hình mũ bảo hộ vàng trong khung phát hiện.</desc>
+  <defs>
+    <linearGradient id="background" x2="1" y2="1" gradientUnits="objectBoundingBox">
+      <stop stop-color="#101d32"/>
+      <stop offset="1" stop-color="#123950"/>
+    </linearGradient>
+    <linearGradient id="helmet" x2="0" y2="1" gradientUnits="objectBoundingBox">
+      <stop stop-color="#ffe18a"/>
+      <stop offset="1" stop-color="#ffb634"/>
+    </linearGradient>
+    <pattern id="grid" width="26" height="26" patternUnits="userSpaceOnUse">
+      <path d="M 26 0 H 0 V 26" fill="none" stroke="#6cbed6" stroke-opacity=".16"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="340" rx="24" fill="url(#background)"/>
+  <rect x="760" y="29" width="400" height="282" rx="18" fill="#132c43" stroke="#477289"/>
+  <rect x="776" y="45" width="368" height="250" rx="11" fill="url(#grid)"/>
+  <path d="M 56 68 H 93" stroke="#ffc758" stroke-width="4" stroke-linecap="round"/>
+  <g font-family="Segoe UI, Arial, sans-serif">
+    <text x="110" y="75" fill="#fbd77d" font-size="19" font-weight="700" letter-spacing="2.2">THỊ GIÁC MÁY TÍNH</text>
+    <text x="54" y="146" fill="#f5f8fc" font-size="62" font-weight="700">Phát hiện mũ</text>
+    <text x="54" y="219" fill="#f5f8fc" font-size="62" font-weight="700">bảo hộ</text>
+    <text x="57" y="276" fill="#b9d9ea" font-size="27">YOLOv8 trên ảnh và video công trường</text>
+  </g>
+  <path d="M 823 116 V 91 H 848 M 1072 91 H 1097 V 116 M 1097 235 V 260 H 1072 M 848 260 H 823 V 235" fill="none" stroke="#63e4e2" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 869 211 V 198 C 869 151 905 120 947 116 L 947 105 Q 960 98 973 105 V 116 C 1015 120 1051 151 1051 198 V 211 Z" fill="url(#helmet)"/>
+  <path d="M 942 122 L 938 166 M 978 122 L 982 166" fill="none" stroke="#aa6a0f" stroke-width="5" stroke-linecap="round" opacity=".7"/>
+  <path d="M 862 210 H 1058 Q 1071 210 1071 223 Q 1071 234 1058 234 H 862 Q 849 234 849 223 Q 849 210 862 210 Z" fill="#ffbf45"/>
+</svg>
