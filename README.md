@@ -3,7 +3,7 @@
 </h1>
 
 <p align="center">
-  <a href="https://drive.google.com/drive/folders/1d4UUCgZ9figKF6BIRLrJe0rGwLsUl7oo"><img alt="Xem video demo" src="https://img.shields.io/badge/VIDEO-DEMO-087F82?style=flat-square"></a>
+  <a href="https://drive.google.com/file/d/1Om8I1JsG1h8oeqn_iCFl5QcGQYJWE1D8/view"><img alt="Xem video demo" src="https://img.shields.io/badge/VIDEO-DEMO-087F82?style=flat-square"></a>
   <a href="https://www.kaggle.com/code/maika123/notebookc7801aaccc/output?scriptVersionId=366157817"><img alt="Kết quả đánh giá trên Kaggle" src="https://img.shields.io/badge/KAGGLE-K%E1%BA%BET%20QU%E1%BA%A2-175B91?style=flat-square"></a>
   <a href="https://docs.google.com/document/d/10zXsgy_0juhgdIpex2dbZ8Y8d3KVphTD/edit"><img alt="Đọc báo cáo" src="https://img.shields.io/badge/DRIVE-B%C3%81O%20C%C3%81O-344968?style=flat-square"></a>
 </p>
@@ -17,14 +17,12 @@
   <a href="#kết-quả">Kết quả</a> · <a href="#chạy-nhanh">Chạy nhanh</a> · <a href="#dữ-liệu-và-huấn-luyện">Dữ liệu</a> · <a href="#tái-lập-đánh-giá">Tái lập</a> · <a href="#phân-tích-lỗi">Phân tích lỗi</a>
 </p>
 
-<details>
-<summary>Xem khung hình dự đoán từ video công trường</summary>
+## Demo video
 
-![Khung hình công trường với các hộp dự đoán helmet của YOLOv8m](docs/assets/demo-frame.jpg)
+[![Khung hình công trường với các hộp dự đoán helmet của YOLOv8m. Bấm để xem video.](docs/assets/demo-frame.jpg)](https://drive.google.com/file/d/1Om8I1JsG1h8oeqn_iCFl5QcGQYJWE1D8/view)
 
-Khung hình tại 18,67 giây từ demo YOLOv8m. Nguồn video: [aksinfo7 universe trên Pexels](https://www.pexels.com/video/construction-workers-building-urban-skyscraper-29888510/).
+Khung hình ở giây 18,67 cho thấy các hộp dự đoán `helmet` và điểm tin cậy. Video đầu ra dài khoảng **29 giây**, độ phân giải **1080p**. Bấm vào ảnh để mở video. [Chạy lại demo](#video) · [Nguồn clip: aksinfo7 universe trên Pexels](https://www.pexels.com/video/construction-workers-building-urban-skyscraper-29888510/)
 
-</details>
 
 ## Kết quả
 
@@ -55,11 +53,13 @@ Lấy checkpoint YOLOv8m đã huấn luyện, đặt tại `weights/v8m/best.pt`
 
 ### Video
 
-Cài FFmpeg có `libx264` và thêm vào PATH. Tải clip gốc 3840 × 2160, 30 FPS. Lệnh chạy trên CPU, xuất MP4 1080p và nhật ký vào thư mục mới `runs/demo`. [Nguồn clip](https://www.pexels.com/video/construction-workers-building-urban-skyscraper-29888510/)
+Để tái tạo ví dụ trên, cần hai tệp đầu vào: clip gốc `12831498_3840_2160_30fps.mp4` (4K, 30 FPS, 874 khung hình) và checkpoint YOLOv8m đặt tại `weights/v8m/best.pt`. Cài FFmpeg có `libx264` và thêm vào PATH. Dùng một đường dẫn đầu ra mới cho mỗi lần chạy. [Tải clip gốc từ Pexels](https://www.pexels.com/video/construction-workers-building-urban-skyscraper-29888510/) · [Thư mục checkpoint](https://drive.google.com/drive/folders/16BKDss7JgPP565ayg1fow6ZEUUdVbbzh)
 
 ```sh
 python scripts/demo_video.py --source /path/to/12831498_3840_2160_30fps.mp4 --weights weights/v8m/best.pt --output runs/demo
 ```
+
+Sau khi chạy trên CPU, mở `runs/demo/demo_v8m_clip2.mp4` để xem video có khung dự đoán. Tệp `runs/demo/demo_log.txt` ghi cấu hình, số khung hình, SHA-256 của checkpoint và thời gian xử lý. [Xem đầu ra mẫu](https://drive.google.com/file/d/1Om8I1JsG1h8oeqn_iCFl5QcGQYJWE1D8/view)
 
 ### Webcam
 
