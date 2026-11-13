@@ -1,8 +1,10 @@
 # Phát hiện mũ bảo hộ bằng YOLOv8
 
-**Nhóm 17 · Nơ-ron và Học sâu · Đại học Phenikaa**
+**Dự án của [ttt-huong](https://github.com/ttt-huong) · Nơ-ron và Học sâu · Đại học Phenikaa**
 
-Hệ thống phát hiện vùng đầu trong ảnh và video với hai nhãn: `helmet` (đội mũ bảo hộ) và `bare_head` (đầu không đội mũ bảo hộ). Nhóm huấn luyện và so sánh YOLOv8n, YOLOv8s, YOLOv8m và mô hình đối chứng YOLOv5su trên Safety Helmet Wearing Dataset (SHWD).
+Tôi thực hiện dự án này để phát hiện người có đội mũ bảo hộ trong ảnh và video công trường. Mô hình định vị vùng đầu và gán một trong hai nhãn: `helmet` (đội mũ bảo hộ) hoặc `bare_head` (đầu không đội mũ bảo hộ).
+
+Tôi chuẩn bị dữ liệu SHWD, huấn luyện và so sánh YOLOv8n, YOLOv8s, YOLOv8m với mô hình đối chứng YOLOv5su. Repo lưu quy trình đánh giá, phân tích các ca bỏ sót và chạy demo trên video hoặc webcam.
 
 [Xem video demo](https://drive.google.com/drive/folders/1d4UUCgZ9figKF6BIRLrJe0rGwLsUl7oo) · [Xem báo cáo](https://docs.google.com/document/d/10zXsgy_0juhgdIpex2dbZ8Y8d3KVphTD/edit) · [Xem kết quả Kaggle](https://www.kaggle.com/code/maika123/notebookc7801aaccc/output?scriptVersionId=366157817)
 
@@ -33,7 +35,7 @@ cd helmet-detection-yolov8
 python -m pip install -r requirements.txt
 ```
 
-Lấy checkpoint YOLOv8m của nhóm, đặt tại `weights/v8m/best.pt`. Các tài liệu và checkpoint trên Drive hoặc Kaggle có thể cần quyền truy cập. [Thư mục checkpoint](https://drive.google.com/drive/folders/16BKDss7JgPP565ayg1fow6ZEUUdVbbzh)
+Lấy checkpoint YOLOv8m đã huấn luyện, đặt tại `weights/v8m/best.pt`. Các tài liệu và checkpoint trên Drive hoặc Kaggle có thể cần quyền truy cập. [Thư mục checkpoint](https://drive.google.com/drive/folders/16BKDss7JgPP565ayg1fow6ZEUUdVbbzh)
 
 ### Video
 
@@ -119,7 +121,7 @@ python scripts/analyze_image_conditions.py prepare --data-root data/processed/he
 python scripts/plot_occlusion_review.py --sample runs/conditions/occlusion_sample.csv --images data/processed/helmet_yolo/images --output runs/occlusion_review
 ```
 
-Điền các cột `review_id,occlusion,note` trong `occlusion_blind.csv` sau khi rà ảnh gốc. Giá trị `occlusion` là `che`, `khong_che` hoặc `khong_ro`. Có thể dùng lại nhãn rà của nhóm để đối chiếu kết quả. [Hồ sơ T52–T53](https://drive.google.com/file/d/1dQm7E3KNks1RJNK68uf3R-pL3cl-Mq87/view)
+Điền các cột `review_id,occlusion,note` trong `occlusion_blind.csv` sau khi rà ảnh gốc. Giá trị `occlusion` là `che`, `khong_che` hoặc `khong_ro`. Có thể dùng lại tệp nhãn đã lưu để đối chiếu kết quả. [Hồ sơ T52–T53](https://drive.google.com/file/d/1dQm7E3KNks1RJNK68uf3R-pL3cl-Mq87/view)
 
 ```sh
 python scripts/analyze_image_conditions.py aggregate --conditions runs/conditions --review occlusion_blind.csv --matches runs/errors/ground_truth_matches.csv --output runs/conditions_summary
@@ -143,5 +145,5 @@ Phân tích che khuất mô tả mẫu 48 hộp, trong đó 15 hộp chưa đủ
 ## Nguồn
 
 - Bộ dữ liệu và tài liệu mô hình. [SHWD](https://github.com/njvisionpower/Safety-Helmet-Wearing-Dataset) · [Ultralytics YOLOv8](https://docs.ultralytics.com/models/yolov8/) · [Ultralytics YOLOv5u](https://docs.ultralytics.com/models/yolov5/)
-- Phép ghép hộp trong `analyze_saved_v8m.py` dựa trên script của Tuấn trong Nhóm 17. [Mã phân tích gốc](https://github.com/mahTuqn/Noron/blob/main/scripts/analyze_errors.py)
+- Tôi tham khảo script của Tuấn khi triển khai phép ghép hộp trong `analyze_saved_v8m.py`. [Mã phân tích gốc](https://github.com/mahTuqn/Noron/blob/main/scripts/analyze_errors.py)
 - Tham khảo bố cục README. [Ultralytics YOLOv5](https://github.com/ultralytics/yolov5) · [Detectron2](https://github.com/facebookresearch/detectron2) · [MMDetection](https://github.com/open-mmlab/mmdetection)
