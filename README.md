@@ -3,13 +3,13 @@
 </h1>
 
 <p align="center">
-  <a href="https://github.com/ttt-huong/helmet-detection-yolov8/actions/workflows/ci.yml"><img alt="Trạng thái build trên GitHub Actions" src="https://github.com/ttt-huong/helmet-detection-yolov8/actions/workflows/ci.yml/badge.svg"></a>
+  <a href="https://github.com/ttt-huong/helmet-detection-yolov8/actions/workflows/ci.yml?query=branch%3Amain"><img alt="Trạng thái build của nhánh main" src="https://github.com/ttt-huong/helmet-detection-yolov8/actions/workflows/ci.yml/badge.svg?branch=main"></a>
   <a href="https://www.python.org/"><img alt="Python 3.12+" src="https://img.shields.io/badge/Python-3.12%2B-306998?logo=python&amp;logoColor=FFD43B"></a>
   <a href="https://pytorch.org/"><img alt="PyTorch" src="https://img.shields.io/badge/PyTorch-20232B?logo=pytorch&amp;logoColor=EE4C2C"></a>
 </p>
 
 <p align="center">
-  <a href="https://colab.research.google.com/github/ttt-huong/helmet-detection-yolov8/blob/handoff-repro-checklist/notebooks/01_Chuan_bi_va_khao_sat_du_lieu.ipynb"><img alt="Mở notebook trên Google Colab" src="https://img.shields.io/badge/Colab-M%E1%BB%9F%20notebook-9A5D00?logo=googlecolab&amp;logoColor=F9AB00"></a>
+  <a href="https://colab.research.google.com/github/ttt-huong/helmet-detection-yolov8/blob/main/notebooks/01_Chuan_bi_va_khao_sat_du_lieu.ipynb"><img alt="Mở notebook trên Google Colab" src="https://img.shields.io/badge/Colab-M%E1%BB%9F%20notebook-9A5D00?logo=googlecolab&amp;logoColor=F9AB00"></a>
   <a href="https://www.kaggle.com/code/maika123/notebookc7801aaccc/output?scriptVersionId=366157817"><img alt="Kết quả đánh giá trên Kaggle" src="https://img.shields.io/badge/Kaggle-K%E1%BA%BFt%20qu%E1%BA%A3-146489?logo=kaggle&amp;logoColor=20BEFF"></a>
   <a href="https://drive.google.com/file/d/1Om8I1JsG1h8oeqn_iCFl5QcGQYJWE1D8/view"><img alt="Xem video demo trên Google Drive" src="https://img.shields.io/badge/Google%20Drive-Video%20demo-15754C?logo=googledrive&amp;logoColor=62D394"></a>
   <a href="https://docs.google.com/document/d/10zXsgy_0juhgdIpex2dbZ8Y8d3KVphTD/edit"><img alt="Đọc báo cáo trên Google Drive" src="https://img.shields.io/badge/Google%20Drive-B%C3%A1o%20c%C3%A1o-344968?logo=googledrive&amp;logoColor=62D394"></a>
@@ -51,7 +51,7 @@ Kết quả chính trên `test_clean` (1.087 ảnh). YOLOv8m đạt mAP cao nh�
 Cần Python 3.12 trở lên và bản PyTorch phù hợp với máy. Các lệnh dưới đây chạy từ thư mục repo.
 
 ```sh
-git clone --branch handoff-repro-checklist https://github.com/ttt-huong/helmet-detection-yolov8.git
+git clone https://github.com/ttt-huong/helmet-detection-yolov8.git
 cd helmet-detection-yolov8
 python -m pip install -r requirements.txt
 ```
