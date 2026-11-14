@@ -1,3 +1,11 @@
+
+
+https://github.com/user-attachments/assets/a63a4834-c9cd-4106-82de-9c993370fa34
+
+
+
+https://github.com/user-attachments/assets/18b9df0f-b2cf-4409-93cb-5e2a1b83a708
+
 <h1 align="center">
   <img src="docs/assets/readme-banner.webp" alt="Phát hiện mũ bảo hộ bằng YOLOv8" width="100%">
 </h1>
