@@ -1,11 +1,3 @@
-
-
-https://github.com/user-attachments/assets/a63a4834-c9cd-4106-82de-9c993370fa34
-
-
-
-https://github.com/user-attachments/assets/18b9df0f-b2cf-4409-93cb-5e2a1b83a708
-
 <h1 align="center">
   <img src="docs/assets/readme-banner.webp" alt="Phát hiện mũ bảo hộ bằng YOLOv8" width="100%">
 </h1>
@@ -19,7 +11,7 @@ https://github.com/user-attachments/assets/18b9df0f-b2cf-4409-93cb-5e2a1b83a708
 <p align="center">
   <a href="https://colab.research.google.com/github/ttt-huong/helmet-detection-yolov8/blob/main/notebooks/01_Chuan_bi_va_khao_sat_du_lieu.ipynb"><img alt="Mở notebook trên Google Colab" src="https://img.shields.io/badge/Colab-M%E1%BB%9F%20notebook-9A5D00?logo=googlecolab&amp;logoColor=F9AB00"></a>
   <a href="https://www.kaggle.com/code/maika123/notebookc7801aaccc/output?scriptVersionId=366157817"><img alt="Kết quả đánh giá trên Kaggle" src="https://img.shields.io/badge/Kaggle-K%E1%BA%BFt%20qu%E1%BA%A3-146489?logo=kaggle&amp;logoColor=20BEFF"></a>
-  <a href="https://drive.google.com/file/d/1Om8I1JsG1h8oeqn_iCFl5QcGQYJWE1D8/view"><img alt="Xem video demo trên Google Drive" src="https://img.shields.io/badge/Google%20Drive-Video%20demo-15754C?logo=googledrive&amp;logoColor=62D394"></a>
+  <a href="#demo-video"><img alt="Xem video demo trong README" src="https://img.shields.io/badge/GitHub-Video%20demo-15754C?logo=github&amp;logoColor=white"></a>
   <a href="https://docs.google.com/document/d/10zXsgy_0juhgdIpex2dbZ8Y8d3KVphTD/edit"><img alt="Đọc báo cáo trên Google Drive" src="https://img.shields.io/badge/Google%20Drive-B%C3%A1o%20c%C3%A1o-344968?logo=googledrive&amp;logoColor=62D394"></a>
 </p>
 
@@ -34,10 +26,9 @@ https://github.com/user-attachments/assets/18b9df0f-b2cf-4409-93cb-5e2a1b83a708
 
 ## Demo video
 
-[![Khung hình công trường với các hộp dự đoán helmet của YOLOv8m. Bấm để xem video.](docs/assets/demo-frame.jpg)](https://drive.google.com/file/d/1Om8I1JsG1h8oeqn_iCFl5QcGQYJWE1D8/view)
+https://github.com/user-attachments/assets/18b9df0f-b2cf-4409-93cb-5e2a1b83a708
 
-Khung hình ở giây 18,67 cho thấy các hộp dự đoán `helmet` và điểm tin cậy. Video đầu ra dài khoảng **29 giây**, độ phân giải **1080p**. Bấm vào ảnh để mở video. [Chạy lại demo](#video) · [Nguồn clip: aksinfo7 universe trên Pexels](https://www.pexels.com/video/construction-workers-building-urban-skyscraper-29888510/)
-
+Video **29 giây**, **1080p**, hiển thị các hộp dự đoán `helmet` và điểm tin cậy của YOLOv8m. [Xem khung hình dự đoán](docs/assets/demo-frame.jpg) · [Xem trên Google Drive](https://drive.google.com/file/d/1Om8I1JsG1h8oeqn_iCFl5QcGQYJWE1D8/view) · [Chạy lại demo](#video) · [Nguồn clip: aksinfo7 universe trên Pexels](https://www.pexels.com/video/construction-workers-building-urban-skyscraper-29888510/)
 
 ## Kết quả
 
