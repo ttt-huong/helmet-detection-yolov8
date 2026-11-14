@@ -28,7 +28,9 @@
 
 https://github.com/user-attachments/assets/18b9df0f-b2cf-4409-93cb-5e2a1b83a708
 
-Video **29 giây**, **1080p**, hiển thị các hộp dự đoán `helmet` và điểm tin cậy của YOLOv8m. [Xem khung hình dự đoán](docs/assets/demo-frame.jpg) · [Xem trên Google Drive](https://drive.google.com/file/d/1Om8I1JsG1h8oeqn_iCFl5QcGQYJWE1D8/view) · [Chạy lại demo](#video) · [Nguồn clip: aksinfo7 universe trên Pexels](https://www.pexels.com/video/construction-workers-building-urban-skyscraper-29888510/)
+**YOLOv8m phát hiện mũ bảo hộ tại công trường** (29 giây, 1080p).
+
+[Chạy lại demo](#video) · [Clip gốc của aksinfo7 universe trên Pexels](https://www.pexels.com/video/construction-workers-building-urban-skyscraper-29888510/)
 
 ## Kết quả
 
