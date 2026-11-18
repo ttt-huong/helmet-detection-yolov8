@@ -8,4 +8,4 @@ PartB_00076,FN,11,bare_head,54.3,Đầu ở mép vùng cắt giữa nhóm ngư�
 PartB_01294,FN,72,bare_head,35.2,Vùng đầu trong ảnh đám đông tối và nhòe; hộp 23.0 px,Không tách riêng ảnh hưởng của độ sáng và độ mờ
 PartB_02203,FN,1,bare_head,57.6,Vùng đầu phía trái có ít chi tiết nhìn thấy; hộp 33.3 px,Cần xem ảnh gốc trước khi diễn giải tình trạng đội mũ
 000441,FP,3,helmet,81.0,Mũ kê-pi bị báo helmet confidence 0.896; IoU 0.950 với nhãn bare_head,Ca nhầm mũ thường trong tập này
-001335,FP,0,helmet,169.4,Khung helmet confidence 0.914 phủ mũ xanh che quanh mặt,Nhãn và phạm vi lớp cần được đối chiếu khi diễn giải ca này
+001335,FP,0,helmet,169.4,Vật che đầu màu xanh dạng mũ trùm hoặc khăn che quanh đầu bị báo helmet confidence 0.914,Cần đối chiếu nhãn gốc; đây là ca nhầm vật che đầu với mũ bảo hộ
