@@ -71,7 +71,7 @@ Sau khi chạy trên CPU, mở `runs/demo/demo_v8m_clip2.mp4` để xem video c�
 
 ### Webcam
 
-Cài `mediapipe==1.2.2`. Tải `blaze_face_short_range.tflite` và `hand_landmarker.task` vào `models/`. Chạy trên máy có webcam và OpenCV hỗ trợ cửa sổ. Bấm `Q` hoặc `Esc` để thoát. [MediaPipe Face Detector](https://developers.google.com/edge/mediapipe/solutions/vision/face_detector#models) · [MediaPipe Hand Landmarker](https://developers.google.com/edge/mediapipe/solutions/vision/hand_landmarker#models)
+Cài MediaPipe trong cùng môi trường Python: `python -m pip install "mediapipe==1.2.2"`. Tạo thư mục `models/` ở thư mục gốc repo và tải hai model MediaPipe chính thức, lưu đúng tên: [`blaze_face_short_range.tflite`](https://storage.googleapis.com/mediapipe-models/face_detector/blaze_face_short_range/float16/1/blaze_face_short_range.tflite) và [`hand_landmarker.task`](https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task). Webcam demo chạy cục bộ trên máy có webcam, dùng YOLOv8m trên CPU; không mở cửa sổ webcam trong Colab hoặc Kaggle. Nếu camera 0 không mở được, thử `--camera 1`; bấm `Q` hoặc `Esc` để thoát. Tài liệu: [MediaPipe Face Detector](https://developers.google.com/edge/mediapipe/solutions/vision/face_detector) · [MediaPipe Hand Landmarker](https://developers.google.com/edge/mediapipe/solutions/vision/hand_landmarker).
 
 ```sh
 python scripts/demo_webcam.py --weights weights/v8m/best.pt --models-dir models --camera 0
