@@ -1,0 +1,14 @@
+**
+!service/
+!service/Dockerfile
+!service/app.py
+!service/requirements.txt
+!web/
+!web/index.html
+!web/app.js
+!web/styles.css
+!web/readability.css
+!web/demo.html
+!web/demo.js
+!web/demo.css
+!web/demo-status.css

@@ -1,0 +1,133 @@
+{
+  "format": "helmet-vision-review-v7",
+  "classes": [
+    {
+      "id": 0,
+      "name": "hard_hat_worn"
+    },
+    {
+      "id": 1,
+      "name": "traffic_helmet_worn"
+    },
+    {
+      "id": 2,
+      "name": "cap_worn"
+    },
+    {
+      "id": 3,
+      "name": "beanie_worn"
+    },
+    {
+      "id": 4,
+      "name": "bare_head"
+    },
+    {
+      "id": 5,
+      "name": "depicted_hat"
+    },
+    {
+      "id": 6,
+      "name": "loose_hat"
+    },
+    {
+      "id": 7,
+      "name": "depiction_region"
+    }
+  ],
+  "rule": "Hardhat-only model review v7. Browser retains eight review classes, but only confirmed hard_hat_worn in a verified real scene is a target wearer and contributes to real_wearer_count; traffic helmets, caps, beanies, bare heads, depicted hats, and loose hats are not model targets. Every image starts with frame_source_status=review_required. Select a scene type before marking the source clear. For scene_type=other, explicitly confirm that a full-frame review found no people in posters, printed photos, or screens. Mark depiction_only head boxes as depicted and never count them as real wearers. For mixed_scene, mark every physical poster, printed photo, and screen that contains people. depiction_surface_types is a unique summary of the declared physical-surface inventory. Every depiction_region annotation binds to exactly one depiction_surface_id, and every inventory ID must have exactly one separate region before clear or export. If any surface is borderless or unclear, keep frame_source_status=review_required. depiction_only and mixed_scene require at least one physical surface. A worn-hat or bare_head box is suppressed if its center is inside any depiction_region or at least half its area is covered by the union of depiction regions. Smaller nonzero union coverage always remains uncertain. Only zero-overlap hard_hat_worn boxes with a clear frame, an eligible scene type, and explicit box confirmation can be exported as model target labels. Each image must be explicitly reviewed as empty or reviewed with labels before JSON v7 export.",
+  "images": [
+    {
+      "image_id": "c760e284-2c69-4042-aeab-46893a254149",
+      "file_name": "geometry-review-fixture.png",
+      "width": 800,
+      "height": 400,
+      "group_id": "",
+      "scene_type": "mixed_scene",
+      "other_scene_no_depicted_people_reviewed": false,
+      "depiction_surface_types": [
+        "poster"
+      ],
+      "depiction_surfaces": [
+        {
+          "surface_id": "surface:b2b08d60-eef8-4e0b-94dd-badf4e146398",
+          "surface_type": "poster"
+        },
+        {
+          "surface_id": "surface:8148f8b2-babb-46d5-a573-e92ecea01bdb",
+          "surface_type": "poster"
+        },
+        {
+          "surface_id": "surface:a6caf0d0-5808-4d99-8f38-4fe9e5af4c14",
+          "surface_type": "poster"
+        }
+      ],
+      "split": "",
+      "rights": {
+        "training_use": "unknown",
+        "basis": "",
+        "source_reference": "",
+        "license_id": "",
+        "attribution": ""
+      },
+      "frame_source_status": "clear",
+      "frame_source_reviewed_at": "2026-11-26T17:44:44.694Z",
+      "image_review_status": "reviewed_with_labels",
+      "real_wearer_count": 0,
+      "annotations": [
+        {
+          "class_id": 0,
+          "class_name": "hard_hat_worn",
+          "x": 0.06654060810860704,
+          "y": 0.4088846650150638,
+          "width": 0.30245746691871456,
+          "height": 0.37807183364839314,
+          "review_state": "depicted",
+          "counts_as_real_wearer": false
+        },
+        {
+          "class_id": 0,
+          "class_name": "hard_hat_worn",
+          "x": 0.4068052583921609,
+          "y": 0.3332702982853852,
+          "width": 0.22684310018903592,
+          "height": 0.4536862003780718,
+          "review_state": "depicted",
+          "counts_as_real_wearer": false
+        },
+        {
+          "class_id": 7,
+          "class_name": "depiction_region",
+          "x": 0.06654060810860704,
+          "y": 0.4013232571866877,
+          "width": 0.07561436672967864,
+          "height": 0.3856332703213611,
+          "depiction_surface_id": "surface:8148f8b2-babb-46d5-a573-e92ecea01bdb",
+          "review_state": "confirmed",
+          "counts_as_real_wearer": false
+        },
+        {
+          "class_id": 7,
+          "class_name": "depiction_region",
+          "x": 0.29338370829764293,
+          "y": 0.4013232571866877,
+          "width": 0.07561436672967864,
+          "height": 0.3856332703213611,
+          "depiction_surface_id": "surface:b2b08d60-eef8-4e0b-94dd-badf4e146398",
+          "review_state": "confirmed",
+          "counts_as_real_wearer": false
+        },
+        {
+          "class_id": 7,
+          "class_name": "depiction_region",
+          "x": 0.5202268084866789,
+          "y": 0.4088846938596556,
+          "width": 0.11531190926275992,
+          "height": 0.38185255198487716,
+          "depiction_surface_id": "surface:a6caf0d0-5808-4d99-8f38-4fe9e5af4c14",
+          "review_state": "confirmed",
+          "counts_as_real_wearer": false
+        }
+      ]
+    }
+  ]
+}

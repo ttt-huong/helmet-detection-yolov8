@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f4f5f2">
+    <meta name="description" content="Thử mô hình nhận diện mũ bảo hộ lao động và rà kết quả poster qua API.">
+    <title>Helmet Vision · Thử mô hình</title>
+    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="./demo.css">
+      <link rel="stylesheet" href="./demo-status.css?v=20261128-live-readiness">
+  </head>
+  <body class="demo-page">
+    <header class="demo-topbar">
+      <a class="demo-brand" href="./" aria-label="Helmet Vision, trang chủ">
+        <span class="demo-brand-glyph" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M5.5 18.5a10.5 10.5 0 0 1 21 0v2H5.5z"/><path d="M3.5 21.5h25M12 11.5c1.8-1 4.2-1 6 0"/></svg></span>
+        <span>helmet<span class="demo-brand-light">vision</span></span>
+      </a>
+      <nav class="demo-nav" aria-label="Điều hướng chính">
+        <a href="./">Gán nhãn</a>
+        <a href="./demo.html" aria-current="page">Thử mô hình</a>
+        <a href="/docs">API</a>
+      </nav>
+      <div class="api-status-actions">
+        <div id="api-status" class="api-status" role="status" aria-live="polite" data-state="checking">
+          <span class="api-status-dot" aria-hidden="true"></span><span id="api-status-text">Đang kiểm tra API</span>
+        </div>
+        <button id="recheck-api" class="api-recheck" type="button" aria-controls="api-status">Kiểm tra lại</button>
+      </div>
+    </header>
+
+    <main class="demo-main">
+      <section class="demo-intro" aria-labelledby="demo-title">
+        <p class="demo-eyebrow">THỬ NGHIỆM · SUY LUẬN QUA API</p>
+        <h1 id="demo-title">Kiểm tra ảnh với mô hình</h1>
+        <p>Đầu ra PPE nhắm tới mũ bảo hộ lao động. Mũ giao thông, mũ lưỡi trai và mũ len là nhóm âm tính, không có nhãn subtype riêng. Cổng phát hành chỉ đạt trên từng subtype nếu locked-test có ít nhất 100 group độc lập và 0 dự đoán hardhat; hiện chưa có kết quả runtime để xác nhận. Vùng poster, ảnh in và màn hình là lớp phụ để lọc nguồn ảnh, không phải nhãn PPE.<br><span>Hiện chưa có model sẵn sàng để chạy inference; bạn vẫn có thể gán nhãn thủ công trong trình duyệt, nhưng đó không phải kết quả mô hình. <a href="./">Mở không gian gán nhãn</a>.</span></p>
+      </section>
+
+      <aside class="demo-notice" role="note">
+        <span class="notice-mark" aria-hidden="true">i</span>
+        <p aria-live="polite"><strong id="image-transfer-title">Đang kiểm tra API.</strong> <span id="image-transfer-detail">Ảnh vẫn ở trong trình duyệt và chưa được gửi.</span></p>
+        <div class="demo-readiness" role="group" aria-label="Chi tiết trạng thái dịch vụ">
+          <div class="readiness-item"><span>Tiến trình API</span><strong id="api-process-state" data-state="checking">Đang kiểm tra</strong></div>
+          <div class="readiness-item"><span>Suy luận</span><strong id="inference-readiness-state" data-state="checking">Đang kiểm tra</strong></div>
+        </div>
+      </aside>
+
+      <div class="demo-layout">
+        <section class="demo-card demo-controls" aria-labelledby="upload-heading">
+          <div class="demo-card-heading">
+            <div><p class="demo-step">BƯỚC 01</p><h2 id="upload-heading">Chọn ảnh kiểm tra</h2></div>
+            <span class="demo-card-icon" aria-hidden="true">01</span>
+          </div>
+
+          <label id="drop-zone" class="image-drop" for="image-input" tabindex="0">
+            <input id="image-input" type="file" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp">
+            <span class="drop-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M16 21V7m0 0-5 5m5-5 5 5M7 20v5a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5"/></svg></span>
+            <strong>Thả ảnh vào đây</strong>
+            <span>hoặc chọn ảnh từ thiết bị</span>
+            <small>JPG, PNG hoặc WEBP · tối đa 10 MB</small>
+          </label>
+
+          <div id="file-summary" class="file-summary" hidden>
+            <span class="file-mark" aria-hidden="true">IMG</span>
+            <span class="file-copy"><strong id="file-name"></strong><small id="file-details"></small></span>
+            <button id="remove-file" class="remove-file" type="button" aria-label="Bỏ ảnh đã chọn">×</button>
+          </div>
+
+          <div class="confidence-control">
+            <div class="confidence-heading"><label for="confidence-input">Ngưỡng confidence</label><output id="confidence-value" for="confidence-input">25%</output></div>
+            <input id="confidence-input" type="range" min="1" max="100" step="1" value="25">
+            <div class="range-ends"><span>1%</span><span>100%</span></div>
+          </div>
+
+          <button id="run-inference" class="run-button" type="button" disabled>
+            <span class="run-icon" aria-hidden="true">↗</span><span id="run-label">Chạy kiểm tra</span>
+          </button>
+          <p class="upload-footnote">Ảnh chỉ được gửi khi bạn bấm chạy. Trang không lưu ảnh vào tài khoản.</p>
+        </section>
+
+        <section class="demo-card demo-results" aria-labelledby="result-heading">
+          <div class="demo-card-heading result-heading">
+            <div><p class="demo-step">BƯỚC 02</p><h2 id="result-heading">Kết quả rà soát</h2></div>
+            <span id="result-badge" class="result-badge">Chưa chạy</span>
+          </div>
+
+          <div id="preview-empty" class="preview-empty">
+            <span class="preview-empty-mark" aria-hidden="true"><svg viewBox="0 0 48 48"><rect x="7" y="7" width="34" height="34" rx="5"/><circle cx="18" cy="18" r="3"/><path d="m10 35 10-10 6 6 5-5 7 7"/></svg></span>
+            <strong>Chọn ảnh để bắt đầu</strong>
+            <span>Hộp dự đoán và trạng thái poster sẽ hiển thị tại đây.</span>
+          </div>
+
+          <div id="preview-frame" class="preview-frame" hidden>
+            <canvas id="preview-canvas" aria-label="Ảnh kiểm tra cùng các hộp phát hiện"></canvas>
+          </div>
+
+          <div id="request-status" class="request-status" role="status" aria-live="polite">Chọn ảnh rồi chạy kiểm tra.</div>
+          <div id="request-error" class="request-error" role="alert" hidden></div>
+
+          <div id="result-summary" class="result-summary" hidden>
+            <div class="count-panel"><span>Số người đội mũ đã xác nhận</span><strong id="confirmed-count">0</strong><small>Cần xác minh nguồn toàn cảnh</small></div>
+            <div class="review-metrics">
+              <div><strong id="candidate-count">0</strong><span>Ứng viên cần rà</span></div>
+              <div><strong id="suppressed-count">0</strong><span>Đã loại bởi vùng ảnh</span></div>
+            </div>
+            <p class="result-rule">Ứng viên không giao vùng poster vẫn chưa được xác minh. Không có nút tự xác nhận trong bản thử này.</p>
+            <ul id="detection-list" class="detection-list" aria-label="Danh sách phát hiện"></ul>
+          </div>
+        </section>
+      </div>
+
+      <footer class="demo-footer"><span>Helmet Vision · thử nghiệm hardhat-only</span><a href="/health">Trạng thái dịch vụ</a></footer>
+    </main>
+  <script src="./demo.js?v=20261128-api-gpu-message" defer></script>
+  </body>
+</html>

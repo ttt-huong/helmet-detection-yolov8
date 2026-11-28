@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f4f5f2">
+    <meta name="description" content="Công cụ rà soát và gán nhãn ảnh cho bộ dữ liệu nhận diện mũ bảo hộ.">
+    <title>Helmet Vision · Rà soát dữ liệu</title>
+    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="./readability.css">
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="rail" aria-label="Điều hướng chính">
+        <a class="brand-mark" href="#workspace" aria-label="Helmet Vision, trang làm việc">
+          <span class="brand-glyph" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M5.5 18.5a10.5 10.5 0 0 1 21 0v2H5.5z"/><path d="M3.5 21.5h25M12 11.5c1.8-1 4.2-1 6 0"/></svg></span>
+          <span class="brand-word">helmet<span>vision</span></span>
+        </a>
+        <nav class="rail-nav">
+          <a class="rail-link is-active" href="#workspace" aria-current="page"><span class="nav-icon" aria-hidden="true">▤</span><span>Gán nhãn</span></a>
+          <a class="rail-link" href="./demo.html"><span class="nav-icon" aria-hidden="true">◉</span><span>Thử mô hình</span></a>
+          <a class="rail-link" href="#guide"><span class="nav-icon" aria-hidden="true">⌘</span><span>Quy tắc</span></a>
+        </nav>
+        <div class="rail-foot"><span class="cloud-dot" aria-hidden="true"></span><span>Gán nhãn trong trình duyệt</span></div>
+      </aside>
+
+      <main id="workspace" class="workspace">
+        <header class="topbar">
+          <div class="breadcrumbs"><span>Dự án</span><span class="crumb-slash">/</span><strong>Nhận diện mũ</strong><span class="version-pill">Bản thử</span></div>
+          <div class="topbar-actions"><span class="save-state"><span class="save-dot"></span>Dữ liệu trong phiên</span><button class="avatar" type="button" aria-label="Tài khoản">HV</button></div>
+        </header>
+
+        <div class="page-content">
+          <section class="page-heading" aria-labelledby="page-title">
+            <div><p class="eyebrow">BỘ DỮ LIỆU · VÒNG RÀ SOÁT 01</p><h1 id="page-title">Rà soát hình ảnh</h1><p class="heading-copy">Gán nhãn tám lớp. Hãy khoanh đủ poster, ảnh in và màn hình, rồi rà toàn cảnh trước khi xác nhận đầu/mũ người thật.</p></div>
+            <div class="heading-action-group"><div class="heading-actions"><button id="export-json" class="button button-quiet" type="button" disabled><span aria-hidden="true">↥</span> Xuất JSON</button><button id="export-overlay" class="button button-quiet" type="button" disabled aria-describedby="overlay-export-help overlay-export-status" title="PNG xem lại chỉ được tạo cục bộ; trạng thái quyền lấy từ metadata từng ảnh."><span aria-hidden="true">▧</span> PNG có khung</button><span id="overlay-export-help" class="visually-hidden">Tải ảnh đang chọn với mọi khung đã rà. PNG chỉ dùng xem lại; metadata có thể lưu user-declared permission nhưng không tự xác minh nguồn hoặc thẩm quyền cấp quyền.</span><label class="button button-primary" for="file-input"><span aria-hidden="true">＋</span> Thêm ảnh</label><input id="file-input" class="visually-hidden" type="file" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp" multiple></div><p id="overlay-export-status" class="overlay-export-status" role="status" aria-live="polite">Chọn ảnh đã rà xong có nhãn để xuất PNG.</p></div>
+          </section>
+
+          <div class="notice" role="note"><span class="notice-icon" aria-hidden="true">i</span><p><strong>Quy tắc nhận diện</strong><span>Chỉ đầu người thật trong cảnh mới được gán nhãn “đang đội”. Người xuất hiện trong ảnh in, poster hoặc màn hình luôn là hình minh họa.</span></p><button id="dismiss-notice" type="button" aria-label="Ẩn ghi chú">×</button></div>
+
+          <section class="draft-tools" aria-label="Bản nháp gán nhãn">
+            <p id="draft-status" role="status" aria-live="polite">Bản nháp tự lưu trong trình duyệt; khi khôi phục, hãy chọn lại ảnh gốc.</p>
+            <div class="draft-actions">
+              <button id="restore-draft" class="button button-quiet" type="button" hidden>Khôi phục bản nháp</button>
+              <button id="discard-draft" class="text-button" type="button" hidden>Xóa bản nháp đã lưu</button>
+              <input id="restore-file-input" class="visually-hidden" type="file" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp" multiple>
+            </div>
+          </section>
+
+          <section class="review-layout" aria-label="Không gian gán nhãn">
+            <aside class="asset-panel panel">
+              <div class="panel-title-row"><div><h2>Ảnh trong phiên</h2><span id="asset-count" class="subtle-text">0 ảnh</span></div><button class="icon-button" id="add-images-small" type="button" aria-label="Thêm ảnh">＋</button></div>
+              <div class="asset-toolbar"><span id="review-count">CHƯA CÓ ẢNH</span><button id="clear-images" type="button" class="text-button" disabled>Xóa phiên</button></div>
+              <div id="asset-list" class="asset-list" aria-live="polite"></div>
+              <div id="empty-assets" class="empty-assets"><div class="empty-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><rect x="8" y="7" width="32" height="34" rx="5"/><circle cx="19" cy="19" r="3"/><path d="m11 35 10-10 6 6 5-5 6 7"/></svg></div><p>Chưa có ảnh nào</p><span>Tải ảnh từ thiết bị để bắt đầu rà soát.</span><label for="file-input" class="text-link">Chọn ảnh</label></div>
+              <div class="asset-footer"><span class="tiny-shield" aria-hidden="true">◇</span>Ảnh không tải lên; nhãn và metadata tự lưu cục bộ</div>
+            </aside>
+
+            <section class="canvas-panel panel" aria-label="Ảnh và hộp nhãn">
+              <div class="canvas-toolbar"><div class="tool-group"><span class="tool-indicator" aria-hidden="true">⌖</span><span id="canvas-mode">Chọn ảnh để bắt đầu</span></div><div class="canvas-actions"><button id="zoom-out" class="icon-button" type="button" aria-label="Thu nhỏ" disabled>−</button><span id="zoom-level" class="zoom-label">100%</span><button id="zoom-in" class="icon-button" type="button" aria-label="Phóng to" disabled>＋</button><span class="toolbar-divider"></span><button id="delete-box" class="icon-button danger-icon" type="button" aria-label="Xóa nhãn đang chọn" disabled>⌫</button></div></div>
+              <p id="canvas-selection-hint" class="canvas-selection-hint">Canvas chỉ hiển thị ảnh và các hộp của thẻ đang chọn. Chọn thẻ khác để xem hộp của ảnh đó.</p>
+              <div id="drop-zone" class="canvas-stage">
+                <canvas id="image-canvas" tabindex="0" aria-label="Ảnh. Kéo trên ảnh để vẽ hộp nhãn. Nhấn Delete để xóa hộp đang chọn." aria-describedby="canvas-selection-hint" hidden></canvas>
+                <div id="canvas-empty" class="canvas-empty"><div class="upload-illustration" aria-hidden="true"><span class="upload-sun"></span><span class="upload-hill upload-hill-back"></span><span class="upload-hill upload-hill-front"></span><span class="upload-frame"><svg viewBox="0 0 32 32"><path d="M16 22V8m0 0-5 5m5-5 5 5M8 21v4a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4"/></svg></span></div><h3>Thả ảnh vào đây</h3><p>hoặc chọn từ thiết bị của bạn</p><label class="button button-outline" for="file-input">Chọn ảnh</label><span class="format-note">JPG, PNG, WEBP · Nhiều ảnh cùng lúc</span></div>
+                <div id="box-help" class="box-help" hidden>Kéo để vẽ · Shift + kéo để vẽ hộp chồng · Kéo hộp để di chuyển · U rà lại / xác nhận · Delete để xóa</div>
+              </div>
+              <div class="canvas-footer"><span id="image-dimensions">Chưa chọn ảnh</span><span class="footer-separator">·</span><span>Kéo chuột để vẽ hộp</span><span class="footer-spacer"></span><span class="unsaved-indicator"><i></i> Xuất JSON để sao lưu</span></div>
+            </section>
+
+            <aside class="labels-panel panel" aria-label="Nhãn và đối tượng">
+              <div class="panel-title-row label-panel-heading"><div><h2>Nhãn đối tượng</h2><span class="subtle-text">Chọn nhãn trước khi vẽ</span></div><span id="box-count" class="count-badge">0</span></div>
+              <div class="label-section"><p class="section-kicker">MŨ TRÊN NGƯỜI</p><p class="target-label-hint">Chỉ mũ bảo hộ lao động là mục tiêu. Mũ giao thông, mũ lưỡi trai và mũ len bị loại khỏi nhãn mô hình; ảnh đã rà có thể làm nền âm.</p><div id="worn-labels" class="label-options"></div></div>
+              <div class="label-section secondary-section"><p class="section-kicker">HÌNH ẢNH KHÔNG PHẢI NGƯỜI THẬT</p><div id="nonperson-labels" class="label-options"></div><p class="region-hint">Vẽ một hộp riêng quanh <strong>từng poster, ảnh in hoặc màn hình vật lý</strong> có người.</p></div>
+              <div class="annotation-section">
+                <div class="annotation-heading"><h3>Hộp đã gán</h3><span id="annotation-total">0 đối tượng</span></div>
+                <div id="image-review-status" class="source-review" role="group" aria-labelledby="image-review-title" hidden>
+                  <div class="source-review-copy"><strong id="image-review-title">Ảnh chưa rà</strong><span>Tiến độ tự lưu trong bản nháp và được đưa vào JSON v7 khi xuất. Xác nhận rà ảnh không thay cho quyền sử dụng. Ảnh trống chỉ xác nhận sau khi nguồn đã rà toàn cảnh; ảnh có nhãn cần xác nhận đã rà hết ảnh sau khi xử lý mọi hộp và nguồn đã rõ.</span></div>
+                  <button id="mark-reviewed-no-labels" type="button" aria-pressed="false">Xác nhận đã rà: không có nhãn</button>
+                  <button id="mark-reviewed-with-labels" type="button" aria-pressed="false" hidden>Xác nhận đã rà hết nhãn trong ảnh</button>
+                </div>
+                <div class="source-review" role="group" aria-labelledby="scene-review-title">
+                  <div class="source-review-copy"><strong id="scene-review-title">Nguồn ảnh chưa xác minh</strong><span id="scene-review-status">Rà toàn ảnh và khoanh riêng từng poster, ảnh in, màn hình có người. Nếu còn mờ hoặc mất viền, giữ cần rà.</span></div>
+                  <label id="other-scene-review-row" class="other-scene-review" hidden><input id="other-scene-review" type="checkbox"><span>Đã rà toàn ảnh gốc: không có người trong poster, ảnh in hoặc màn hình.</span></label>
+                  <button id="review-scene" type="button" aria-pressed="false" disabled>Xác nhận đã rà toàn cảnh</button>
+                </div>
+                <fieldset id="depiction-region-surface-group" class="surface-type-fieldset region-surface-fieldset" aria-describedby="depiction-region-surface-help depiction-region-surface-error" hidden disabled>
+                  <legend>Gán bề mặt vật lý cho vùng</legend>
+                  <label for="depiction-region-surface-type">Bề mặt vật lý của hộp đang chọn hoặc hộp tiếp theo</label>
+                  <select id="depiction-region-surface-type" aria-required="true">
+                    <option value="">Chọn bề mặt cụ thể</option>
+                  </select>
+                  <p id="depiction-region-surface-help" class="surface-type-help">Mỗi poster, ảnh in hoặc màn hình thật cần một hộp riêng. Chọn đúng bản thể trong inventory; chọn một vùng trong danh sách để sửa liên kết.</p>
+                  <p id="depiction-region-surface-error" class="surface-type-error" role="alert" hidden></p>
+                </fieldset>
+                <fieldset id="dataset-metadata" class="dataset-metadata" disabled>
+                  <legend>Metadata ảnh cho bộ dữ liệu</legend>
+                  <label for="image-group-id">Nhóm cảnh / group_id</label>
+                  <input id="image-group-id" type="text" maxlength="160" autocomplete="off" placeholder="Ví dụ: camera01-session03">
+                  <small>Đặt cùng mã cho ảnh/khung thuộc cùng người, video, phiên hoặc cảnh. Không tách một nhóm qua nhiều split.</small>
+                  <div class="dataset-meta-grid">
+                    <label for="image-scene-type">Loại cảnh
+                      <select id="image-scene-type">
+                        <option value="">Chọn loại cảnh</option>
+                        <option value="depiction_only">Chỉ có nội dung hiển thị</option>
+                        <option value="mixed_scene">Cảnh thật cùng nội dung hiển thị</option>
+                        <option value="other">Cảnh khác</option>
+                      </select>
+                    </label>
+                    <label for="image-split">Split
+                      <select id="image-split">
+                        <option value="">Chọn split</option>
+                        <option value="train">Train</option>
+                        <option value="val">Validation</option>
+                        <option value="test">Test khóa</option>
+                      </select>
+                    </label>
+                  </div>
+                  <fieldset id="depiction-surface-group" class="surface-type-fieldset" aria-describedby="surface-type-help surface-count-help depiction-surface-error">
+                    <legend>Loại bề mặt hiển thị</legend>
+                    <p id="surface-type-help" class="surface-type-help">Chọn mọi loại bề mặt có người trong nội dung hiển thị. Mỗi poster, ảnh in hoặc màn hình vật lý cần một hộp riêng; một hộp cho mỗi loại là chưa đủ nếu có nhiều bề mặt.</p>
+                    <div class="surface-type-options">
+                      <label><input type="checkbox" name="depiction_surface_type" value="poster"><span>Poster / áp phích</span></label>
+                      <label><input type="checkbox" name="depiction_surface_type" value="printed_photo"><span>Ảnh in</span></label>
+                      <label><input type="checkbox" name="depiction_surface_type" value="screen"><span>Màn hình (TV, điện thoại, máy tính…)</span></label>
+                      <label><input type="checkbox" name="depiction_surface_type" value="other_depiction"><span>Hình ảnh hiển thị khác (tranh, hình vẽ…)</span></label>
+                    </div>
+                    <div class="dataset-meta-grid surface-count-grid">
+                      <label for="surface-count-poster">Số poster / áp phích</label>
+                      <input id="surface-count-poster" type="number" name="depiction_surface_count" data-surface-type="poster" min="0" max="20" step="1" value="0" aria-describedby="surface-count-help" disabled>
+                      <label for="surface-count-printed-photo">Số ảnh in</label>
+                      <input id="surface-count-printed-photo" type="number" name="depiction_surface_count" data-surface-type="printed_photo" min="0" max="20" step="1" value="0" aria-describedby="surface-count-help" disabled>
+                      <label for="surface-count-screen">Số màn hình</label>
+                      <input id="surface-count-screen" type="number" name="depiction_surface_count" data-surface-type="screen" min="0" max="20" step="1" value="0" aria-describedby="surface-count-help" disabled>
+                      <label for="surface-count-other">Số bề mặt hiển thị khác</label>
+                      <input id="surface-count-other" type="number" name="depiction_surface_count" data-surface-type="other_depiction" min="0" max="20" step="1" value="0" aria-describedby="surface-count-help" disabled>
+                    </div>
+                    <small id="surface-count-help">Bỏ tích tương ứng với số lượng 0. Khi tích loại bề mặt, khai báo từ 1 đến 20 bề mặt vật lý.</small>
+                    <p id="depiction-surface-error" class="surface-type-error" role="alert" hidden>Chọn ít nhất một loại bề mặt cho cảnh hoặc nhãn hình ảnh này trước khi rà nguồn và xuất.</p>
+                  </fieldset>
+                  <label for="image-training-use">Quyền dùng ảnh để train</label>
+                  <select id="image-training-use">
+                    <option value="unknown">Chưa xác minh</option>
+                    <option value="approved">Đã xác nhận được phép</option>
+                    <option value="not_allowed">Không được phép</option>
+                  </select>
+                  <small>Chỉ chọn đã xác nhận khi bạn có căn cứ cho phép dùng ảnh để huấn luyện.</small>
+                  <details class="image-rights-details">
+                    <summary>Căn cứ quyền và attribution</summary>
+                    <label for="image-rights-basis">Căn cứ</label>
+                    <select id="image-rights-basis">
+                      <option value="">Chọn căn cứ</option>
+                      <option value="owned">Ảnh do mình sở hữu/tự chụp</option>
+                      <option value="permission">Có văn bản cho phép</option>
+                      <option value="license">Giấy phép sử dụng</option>
+                      <option value="public_domain">Phạm vi công cộng</option>
+                    </select>
+                    <label for="image-source-reference">Nguồn hoặc nơi lưu căn cứ</label>
+                    <input id="image-source-reference" type="text" maxlength="2048" autocomplete="off" placeholder="URL hoặc mã tham chiếu">
+                    <small>Bắt buộc cho mọi căn cứ. Nếu chọn giấy phép, điền thêm mã giấy phép và attribution.</small>
+                    <label for="image-license-id">Mã giấy phép</label>
+                    <input id="image-license-id" type="text" maxlength="160" autocomplete="off" placeholder="Ví dụ: CC BY 4.0">
+                    <label for="image-attribution">Attribution cần giữ</label>
+                    <input id="image-attribution" type="text" maxlength="512" autocomplete="off" placeholder="Tác giả / nguồn / nội dung ghi công">
+                    <small>Đây là thông tin do người rà khai báo, không phải bước xác minh pháp lý tự động.</small>
+                  </details>
+                </fieldset>
+                <p class="count-rule">Tâm trong vùng hoặc coverage hợp vùng từ 50% sẽ bị loại. Giao nhỏ hơn luôn chưa xác định. Hộp đầu/mũ người thật chỉ được xác nhận sau khi rà toàn cảnh.</p>
+                <div id="annotation-list" class="annotation-list" aria-live="polite"><div class="annotation-empty">Chưa có hộp nhãn. Chọn loại nhãn rồi kéo trên ảnh.</div></div>
+              </div>
+              <div class="model-status"><span class="status-icon" aria-hidden="true">◌</span><p><strong>Chế độ gán nhãn</strong><span>Mô hình chưa được kết nối. Màn hình này không tạo dự đoán AI.</span></p><span class="status-tag">Thủ công</span></div>
+            </aside>
+          </section>
+          <footer class="page-footer"><span>Helmet Vision · Công cụ chuẩn bị dữ liệu</span><span>Ảnh của bạn không được tải lên máy chủ.</span><button id="open-guide" type="button">Xem quy tắc nhãn <span aria-hidden="true">↗</span></button></footer>
+        </div>
+      </main>
+    </div>
+
+    <dialog id="guide-dialog" class="guide-dialog" aria-labelledby="guide-title">
+      <div class="guide-head"><div><p class="eyebrow">QUY TẮC GÁN NHÃN</p><h2 id="guide-title">Phân biệt người thật và hình ảnh</h2></div><button id="close-guide" class="icon-button" type="button" aria-label="Đóng">×</button></div>
+      <p class="guide-intro">Khai báo từng poster, ảnh in hoặc màn hình vật lý có người và vẽ một hộp riêng cho mỗi bề mặt; không chỉ vẽ một hộp cho mỗi loại. Nếu không rõ ranh giới hoặc bề mặt mất viền, giữ trạng thái cần rà.</p>
+      <div class="guide-rule"><span class="guide-mark real">01</span><p><strong>Người thật đang đội mũ</strong><span>Ghi loại mũ để rà soát; chỉ mũ bảo hộ lao động được xuất thành nhãn mục tiêu, các loại còn lại trở thành nền âm.</span></p></div>
+      <div class="guide-rule"><span class="guide-mark depicted">02</span><p><strong>Poster, ảnh in hoặc màn hình</strong><span>Kể cả poster có hình người đội mũ, gán là “Hình trên poster / màn hình”. Không tính là người đang đội mũ.</span></p></div>
+      <div class="guide-rule"><span class="guide-mark loose">03</span><p><strong>Mũ rời</strong><span>Mũ đang cầm, treo hoặc đặt riêng được gán “Mũ rời”. Không suy ra người đang đội.</span></p></div>
+      <div class="guide-rule"><span class="guide-mark unsure">?</span><p><strong>Không đủ bằng chứng</strong><span>Chọn “Chưa xác định”. Nhãn này sẽ bị loại khỏi nhãn YOLO cho tới khi được rà lại.</span></p></div>
+      <button id="guide-done" class="button button-primary guide-done" type="button">Đã hiểu</button>
+    </dialog>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script src="./app.js"></script>
+  </body>
+</html>

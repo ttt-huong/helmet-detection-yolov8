@@ -14,6 +14,9 @@ kaggle.json
 # Dữ liệu và kết quả lớn
 data/raw/
 data/processed/
+source_images/
+reviews/
+datasets/
 runs/
 weights/
 *.pt
@@ -21,3 +24,10 @@ weights/
 *.zip
 *.mp4
 *.avi
+helmet-vision-review-*.json
+helmet-vision-annotations*.json
+split_manifest.csv
+rights_manifest.csv
+deployment_release.json
+deployment_test_summary.json
+training_runtime.json

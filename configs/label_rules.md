@@ -2,6 +2,8 @@
 
 Cập nhật hồ sơ ngày05/11/2026. Không thay đổi nhãn hoặc manifests đã dùng để huấn luyện.
 
+> **Tài liệu lịch sử SHWD/legacy:** các nhãn và quy tắc dưới đây thuộc bộ dữ liệu/mô hình SHWD cũ; không dùng làm ontology, nhãn đầu ra hoặc cấu hình cho pipeline hardhat-only hiện tại (model hai lớp `hard_hat_worn` và `depiction_region`). Giữ nguyên nội dung này để truy vết lịch sử.
+
 ## Quy tắc đã áp dụng
 - `helmet` (id0): box mũ bảo hộ/đầu đội mũ theo nhãn SHWD `hat`; ba box `dog` trong ảnh000377 đã được xem và chuyển sang helmet ở bước trước.
 - `bare_head` (id1): box đầu không đội mũ từ lớp `person`, không phải box toàn thân người.

@@ -1,4 +1,4 @@
-"""Rebuild the frozen SHWD dataset and resume the interrupted YOLOv5su run."""
+"""Audit or prepare the frozen SHWD dataset; training is disabled in this script."""
 
 import argparse
 from collections import Counter, defaultdict
@@ -24,7 +24,6 @@ SPLITS = {
 }
 CLASS_IDS = {"hat": 0, "dog": 0, "person": 1}
 CLASS_NAMES = {0: "helmet", 1: "bare_head"}
-TRAIN_ARGS = {"epochs": 30, "imgsz": 640, "batch": 16, "seed": 42, "optimizer": "auto"}
 
 
 def check_digest(path, expected):
@@ -133,71 +132,6 @@ def verify_dataset(root, audit_dir):
             raise ValueError(f"Frozen YOLO labels changed for image {image_id}")
 
 
-def read_epochs(path):
-    with path.open(encoding="utf-8-sig", newline="") as stream:
-        rows = csv.DictReader(stream, skipinitialspace=True)
-        return [int(row["epoch"]) for row in rows]
-
-
-def resume_training(data_root, audit_dir, source_run, output_run, device):
-    import torch
-    import ultralytics
-
-    if ultralytics.__version__ != "8.4.202":
-        raise RuntimeError(f"Install ultralytics==8.4.202, found {ultralytics.__version__}")
-    if not torch.cuda.is_available() or not 0 <= device < torch.cuda.device_count():
-        raise RuntimeError("The selected CUDA GPU is unavailable")
-    verify_dataset(data_root, audit_dir)
-    checkpoint = source_run / "weights" / "last.pt"
-    original_best = source_run / "weights" / "best.pt"
-    original_csv = source_run / "results.csv"
-    for file in (checkpoint, original_best, original_csv):
-        if not file.is_file() or not file.stat().st_size:
-            raise ValueError(f"Missing or empty source file: {file}")
-    # Only load the trusted checkpoint from this project's original run.
-    model = ultralytics.YOLO(str(checkpoint))
-    ckpt = model.ckpt or {}
-    epoch = ckpt.get("epoch", -1)
-    optimizer = ckpt.get("optimizer")
-    if not 0 <= epoch < TRAIN_ARGS["epochs"] - 1 or not optimizer or not optimizer.get("state"):
-        raise ValueError("Checkpoint is finished or is missing a usable epoch/optimizer state")
-    args = ckpt.get("train_args") or {}
-    differences = {key: (args.get(key), value) for key, value in TRAIN_ARGS.items() if args.get(key) != value}
-    if differences or model.names != CLASS_NAMES or model.task != "detect":
-        raise ValueError(f"Checkpoint does not match frozen baseline: {differences}, {model.names}, {model.task}")
-    if read_epochs(original_csv) != list(range(1, epoch + 2)):
-        raise ValueError("results.csv and last.pt disagree on the completed epochs")
-
-    if output_run.is_relative_to(source_run) or source_run.is_relative_to(output_run):
-        raise ValueError("Choose a separate output run directory")
-    output_run.mkdir(parents=True, exist_ok=False)
-    (output_run / "weights").mkdir()
-    shutil.copy2(original_best, output_run / "weights" / "best.pt")
-    shutil.copy2(original_csv, output_run / "results.csv")
-    if (source_run / "args.yaml").is_file():
-        shutil.copy2(source_run / "args.yaml", output_run / "source_args.yaml")
-
-    def verify_resume(trainer):
-        if not trainer.resume or trainer.start_epoch != epoch + 1 or trainer.epochs != TRAIN_ARGS["epochs"]:
-            raise RuntimeError("Ultralytics did not resume at the expected epoch")
-        if trainer.save_dir.resolve() != output_run:
-            raise RuntimeError(f"Unexpected trainer output directory: {trainer.save_dir}")
-        if len(trainer.train_loader.dataset) != 5457 or len(trainer.test_loader.dataset) != 425:
-            raise RuntimeError("Trainer data sizes differ from the frozen train/val_clean splits")
-
-    model.add_callback("on_pretrain_routine_end", verify_resume)
-    print(f"GPU: {torch.cuda.get_device_name(device)}; PyTorch {torch.__version__}; CUDA {torch.version.cuda}", flush=True)
-    print(f"Resuming at epoch {epoch + 2}/30; destination: {output_run}", flush=True)
-    # v8.4.202 uses checkpoint arguments and explicitly accepts data, save_dir and device overrides.
-    model.train(resume=True, data=str(data_root / "data.yaml"), save_dir=str(output_run), device=device)
-    if read_epochs(output_run / "results.csv") != list(range(1, TRAIN_ARGS["epochs"] + 1)):
-        raise RuntimeError("Run ended without a continuous 30-epoch history; check the training log")
-    for name in ("last.pt", "best.pt"):
-        if not (output_run / "weights" / name).stat().st_size:
-            raise RuntimeError(f"Empty final checkpoint: {name}")
-    print(f"All 30 epochs verified in {output_run / 'results.csv'}")
-
-
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--audit-dir", type=Path, required=True, help="Directory with boxes_raw.csv and seven frozen manifests")
@@ -206,11 +140,7 @@ def main():
     prepare = commands.add_parser("prepare", help="Rebuild YOLO dataset from the original SHWD ZIP")
     prepare.add_argument("archive", type=Path)
     prepare.add_argument("data_root", type=Path)
-    resume = commands.add_parser("resume", help="Resume from a trusted checkpoint on a CUDA GPU")
-    resume.add_argument("data_root", type=Path)
-    resume.add_argument("source_run", type=Path)
-    resume.add_argument("output_run", type=Path)
-    resume.add_argument("--device", type=int, default=0)
+    commands.add_parser("resume", help="Disabled: train only through Notebook 03 on managed Google Colab GPU")
     args = parser.parse_args()
     if args.command == "audit":
         manifests, labels = load_frozen_inputs(args.audit_dir)
@@ -218,8 +148,8 @@ def main():
         print("Frozen manifests:", {name: len(ids) for name, ids in manifests.items()})
     elif args.command == "prepare":
         prepare_dataset(args.archive, args.data_root.resolve(), args.audit_dir)
-    else:
-        resume_training(args.data_root.resolve(), args.audit_dir, args.source_run.resolve(), args.output_run.resolve(), args.device)
+    elif args.command == "resume":
+        parser.error("The legacy resume command is disabled; use Notebook 03 on managed Google Colab GPU.")
 
 
 if __name__ == "__main__":
